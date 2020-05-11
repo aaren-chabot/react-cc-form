@@ -1,0 +1,186 @@
+.front {
+  background-image: url('../../../assets/card-background-1.jpeg');
+  height: 100%;
+  background-size: cover;
+  border-radius: 15px;
+
+  overflow: hidden;
+  box-shadow: 0 20px 60px 0 rgba(14, 42, 90, 0.55);
+  transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
+  transform-style: preserve-3d;
+  transition: all 0.8s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+  backface-visibility: hidden;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(6, 2, 29, 0.45);
+  }
+}
+
+// Card Focus
+.focus {
+  position: absolute;
+  z-index: 3;
+  border-radius: 5px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.35s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+}
+
+.focus-name {
+  composes: focus;
+  width: 315px;
+  height: 57px;
+  transform: translateX(15px) translateY(196px);
+  opacity: 1;
+}
+
+.focus-number {
+  composes: focus;
+  width: 376px;
+  height: 47px;
+  transform: translateX(15px) translateY(114px);
+  opacity: 1;
+}
+
+.focus-expiry {
+  composes: focus;
+  width: 80px;
+  height: 57px;
+  transform: translateX(335px) translateY(196px);
+  opacity: 1;
+}
+
+// Card Content
+.content {
+  font-family: 'Source Code Pro', monospace;
+  padding: 25px 15px;
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  text-shadow: 7px 6px 10px rgba(14, 42, 90, 0.8);
+  user-select: none;
+}
+
+.front-row-1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 0 10px;
+
+  > img {
+    width: 60px;
+  }
+}
+
+.logo {
+  height: 45px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  max-width: 100px;
+  margin-left: auto;
+  width: 100%;
+
+  img {
+    max-width: 100%;
+    object-fit: contain;
+    max-height: 100%;
+    object-position: top right;
+  }
+}
+
+.front-row-2 {
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  font-size: 27px;
+  margin-bottom: 35px;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  span {
+    width: 16px;
+  }
+
+  span:nth-of-type(4n + 4) {
+    margin-right: 30px;
+  }
+}
+
+.front-row-3 {
+  display: flex;
+  align-items: flex-start;
+  color: #fff;
+}
+
+%label {
+  opacity: 0.7;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+%value {
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.name {
+  color: #fff;
+  max-width: calc(100% - 85px);
+  padding: 10px 15px;
+  font-weight: 500;
+  display: block;
+  cursor: pointer;
+
+  span {
+    display: block;
+  }
+
+  > span:first-of-type {
+    display: block;
+    @extend %label;
+  }
+  > span:nth-of-type(2) {
+    @extend %value;
+  }
+}
+
+.expiry {
+  flex-wrap: wrap;
+  font-size: 18px;
+  margin-left: auto;
+  padding: 10px;
+  display: inline-flex;
+  width: 80px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  > span:first-of-type {
+    display: block;
+    @extend %label;
+  }
+
+  > div {
+    @extend %value;
+  }
+}

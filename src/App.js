@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Card from './components/Card/Card';
 import CardForm from './components/CardForm/CardForm';
 
-import styles from './App.scss';
+import styles from './App.module.scss';
 
 function App() {
   return (
     <div className={styles.app}>
-      <Card></Card>
       <CardForm></CardForm>
     </div>
   );

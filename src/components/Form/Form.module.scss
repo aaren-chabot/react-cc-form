@@ -97,18 +97,37 @@
   margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 700px) {
+    flex-flow: column nowrap;
+    align-items: flex-start;
+  }
 }
 
 .expiration {
   display: inline-block;
   margin-right: 35px;
+  @media (max-width: 700px) {
+    margin: 0 0 20px;
+    width: 100%;
+  }
 
-  select:first-of-type {
-    margin-right: 15px;
+  select {
+    @media (max-width: 700px) {
+      width: calc((100% - 15px) / 2);
+    }
+
+    &:first-of-type {
+      margin-right: 15px;
+    }
   }
 }
 
 .cvv {
-  flex-basis: 150px;
+  width: 150px;
   display: inline-block;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 }

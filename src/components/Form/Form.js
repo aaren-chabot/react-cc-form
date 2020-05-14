@@ -1,43 +1,52 @@
 import React from 'react';
 
+import { useFormState, useFormUpdater } from '../../context/form.context';
+import { years, months } from './Form.constants';
+import {
+  CARD_RANGES,
+  DEFAULT_CARD_LENGTH,
+  CARD_FORMAT,
+  CVV_LENGTH,
+  CVV_FORMAT
+} from '../../utils';
+
 import styles from './Form.module.scss';
 
-const months = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-  '07',
-  '08',
-  '09',
-  '10',
-  '11',
-  '12'
-];
-const years = [
-  2020,
-  2021,
-  2022,
-  2023,
-  2024,
-  2025,
-  2026,
-  2027,
-  2028,
-  2029,
-  2030,
-  2031
-];
-
 const CardForm = () => {
-  const handleChange = () => {
-    console.log('form change');
+  const state = useFormState();
+  const updater = useFormUpdater().setState;
+  const resetForm = useFormUpdater().reset;
+
+  const handleChange = (e) => {
+    let property = e.target.name;
+    let cardType = 'visa';
+    const value = e.target.value;
+
+    if (property === 'expiration') {
+      const expirationType = e.target.dataset.type;
+      property = expirationType === 'month' ? 'expMonth' : 'expYear';
+    }
+
+    if (property === 'number') {
+      if (!CARD_FORMAT.test(value)) {
+        return;
+      }
+      if (CARD_RANGES.mastercard.includes(+value.slice(0, 2))) {
+        cardType = 'mastercard';
+      }
+    }
+
+    updater({ ...state, [property]: value, cardType });
   };
 
   const handleFocus = (e) => {
-    console.log('focus', e.target.name);
+    updater({ ...state, focus: e.target.name });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('state', state);
+    resetForm();
   };
 
   return (
@@ -47,8 +56,12 @@ const CardForm = () => {
           <label htmlFor="number">Card Number</label>
           <input
             type="text"
+            value={state.number}
+            onChange={handleChange}
             name="number"
             id="number"
+            maxLength={DEFAULT_CARD_LENGTH}
+            pattern={CARD_FORMAT}
             onFocus={handleFocus}
             autoComplete="off"
           />
@@ -59,6 +72,8 @@ const CardForm = () => {
             Card Name
             <input
               type="text"
+              value={state.name}
+              onChange={handleChange}
               name="name"
               id="name"
               onFocus={handleFocus}
@@ -72,12 +87,13 @@ const CardForm = () => {
             <label htmlFor="expiration">Expiration Date</label>
             <select
               name="expiration"
+              data-type="month"
               id="expiration"
-              value
+              value={state.expMonth}
               onChange={handleChange}
               onFocus={handleFocus}
             >
-              <option value disabled>
+              <option value="" disabled>
                 MONTH
               </option>
               {months.map((month) => (
@@ -87,11 +103,12 @@ const CardForm = () => {
 
             <select
               name="expiration"
-              onFocus={handleFocus}
-              value
+              data-type="year"
+              value={state.expYear}
               onChange={handleChange}
+              onFocus={handleFocus}
             >
-              <option value disabled>
+              <option value="" disabled>
                 YEAR
               </option>
               {years.map((year) => (
@@ -104,16 +121,26 @@ const CardForm = () => {
             <label htmlFor="cvv">CVV</label>
             <input
               type="text"
+              value={state.cvv}
+              onChange={handleChange}
               name="cvv"
               id="cvv"
-              maxLength="4"
+              pattern={CVV_FORMAT}
+              maxLength={CVV_LENGTH}
               onFocus={handleFocus}
               autoComplete="off"
             />
           </div>
         </div>
 
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          value="submit form"
+          onSubmit={handleSubmit}
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

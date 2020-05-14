@@ -1,55 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './CardFront.module.scss';
 import chipImg from '../../../assets/chip.png';
-import visaImg from '../../../assets/visa.png';
 
 import { useFormState } from '../../../context/form.context';
+import { DEFAULT_CARD_LENGTH } from '../../../utils';
 
 const CardFront = () => {
-  const focusState = useFormState().focus;
+  const formState = useFormState();
+  const [logo, setLogo] = useState();
+  const fillerNumberArr = new Array(DEFAULT_CARD_LENGTH).fill('#');
+
+  useEffect(() => {
+    console.log('patyh', `../../../assets/${formState.cardType}.png`);
+    import(`../../../assets/${formState.cardType}.png`).then((logo) =>
+      setLogo(logo.default)
+    );
+  }, [formState.cardType]);
 
   return (
     <div className={styles.front}>
       <div
-        className={styles[focusState ? `focus-${focusState}` : 'focus']}
+        className={
+          styles[formState.focus ? `focus-${formState.focus}` : 'focus']
+        }
       ></div>
       <div className={styles.content}>
         <div className={styles['front-row-1']}>
           <img src={chipImg} alt="chip" />
           <div className={styles.logo}>
-            <img src={visaImg} alt="" />
+            <img src={logo} alt="Card Logo" />
           </div>
         </div>
 
         <label htmlFor="number" className={styles['front-row-2']}>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
-          <span>#</span>
+          {[...formState.number, ...fillerNumberArr]
+            .slice(0, DEFAULT_CARD_LENGTH)
+            .map((num, i) => (
+              <span key={i}>{num}</span>
+            ))}
         </label>
 
         <div className={styles['front-row-3']}>
           <label htmlFor="name" className={styles.name}>
             <span>Card Holder</span>
-            <span>FULL NAME</span>
+            <span>{formState.name ? formState.name : 'FULL NAME'}</span>
           </label>
           <label htmlFor="expiration" className={styles.expiry}>
             <span>Expires</span>
             <div>
-              <span>MM</span>/<span>YY</span>
+              <span>{formState.expMonth ? formState.expMonth : 'MM'}</span>/
+              <span>
+                {formState.expYear ? formState.expYear.slice(-2) : 'YY'}
+              </span>
             </div>
           </label>
         </div>

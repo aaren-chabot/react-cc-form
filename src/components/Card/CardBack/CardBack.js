@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './CardBack.module.scss';
-import cardImg from '../../../assets/visa.png';
+
+import { useFormState } from '../../../context/form.context';
 
 const CardBack = () => {
-  const { back, band, cvv, logo } = styles;
+  const formState = useFormState();
+  const [logo, setLogo] = useState();
+
+  useEffect(() => {
+    import(`../../../assets/${formState.cardType}.png`).then((logo) =>
+      setLogo(logo.default)
+    );
+  }, [formState.cardType]);
+
   return (
-    <div className={back}>
-      <div className={band}></div>
-      <div className={cvv}>
+    <div
+      className={`${styles.back} ${formState.focus === 'cvv' && styles.flip}`}
+    >
+      <div className={styles.band}></div>
+      <div className={styles.cvv}>
         <span>CVV</span>
-        <div></div>
+        <div>{formState.cvv}</div>
       </div>
-      <div className={logo}>
-        <img src={cardImg} alt="" />
+      <div className={styles.logo}>
+        <img src={logo} alt="Card Logo" />
       </div>
     </div>
   );

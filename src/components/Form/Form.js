@@ -49,6 +49,10 @@ const CardForm = () => {
     updater({ ...state, focus: e.target.name });
   };
 
+  const handleBlur = () => {
+    updater({ ...state, focus: '' });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('state', state);
@@ -138,6 +142,7 @@ const CardForm = () => {
               pattern={CVV_FORMAT}
               maxLength={CVV_LENGTH}
               onFocus={handleFocus}
+              onBlur={handleBlur}
               autoComplete="off"
             />
           </div>

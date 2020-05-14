@@ -18,7 +18,9 @@ const CardFront = () => {
   }, [formState.cardType]);
 
   return (
-    <div className={styles.front}>
+    <div
+      className={`${styles.front} ${formState.focus === 'cvv' && styles.flip}`}
+    >
       <div
         className={
           styles[formState.focus ? `focus-${formState.focus}` : 'focus']

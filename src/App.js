@@ -7,7 +7,7 @@ import styles from './App.module.scss';
 function App() {
   return (
     <div className={styles.app}>
-      <CardForm></CardForm>
+      <CardForm />
     </div>
   );
 }

@@ -32,35 +32,52 @@ const years = [
 ];
 
 const CardForm = () => {
-  const {
-    form,
-    'card-number': cardNumber,
-    name,
-    'row-wrap': rowWrap,
-    expiration,
-    cvv
-  } = styles;
+  const handleChange = () => {
+    console.log('form change');
+  };
+
+  const handleFocus = (e) => {
+    console.log('focus', e.target.name);
+  };
 
   return (
-    <div className={form}>
+    <div className={styles.form}>
       <form>
-        <div className={cardNumber}>
+        <div className={styles['card-number']}>
           <label htmlFor="number">Card Number</label>
-          <input type="text" name="number" id="number" autoComplete="off" />
+          <input
+            type="text"
+            name="number"
+            id="number"
+            onFocus={handleFocus}
+            autoComplete="off"
+          />
         </div>
 
-        <div className={name}>
+        <div className={styles.name}>
           <label htmlFor="name">
             Card Name
-            <input type="text" name="name" id="name" autoComplete="off" />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              onFocus={handleFocus}
+              autoComplete="off"
+            />
           </label>
         </div>
 
-        <div className={rowWrap}>
-          <div className={expiration}>
+        <div className={styles['row-wrap']}>
+          <div className={styles.expiration}>
             <label htmlFor="expiration">Expiration Date</label>
-            <select name="expiration-month" id="expiration">
-              <option selected disabled>
+            <select
+              name="expiration"
+              id="expiration"
+              value
+              onChange={handleChange}
+              onFocus={handleFocus}
+            >
+              <option value disabled>
                 MONTH
               </option>
               {months.map((month) => (
@@ -68,8 +85,13 @@ const CardForm = () => {
               ))}
             </select>
 
-            <select name="expiration-year">
-              <option selected disabled>
+            <select
+              name="expiration"
+              onFocus={handleFocus}
+              value
+              onChange={handleChange}
+            >
+              <option value disabled>
                 YEAR
               </option>
               {years.map((year) => (
@@ -78,13 +100,14 @@ const CardForm = () => {
             </select>
           </div>
 
-          <div className={cvv}>
+          <div className={styles.cvv}>
             <label htmlFor="cvv">CVV</label>
             <input
               type="text"
               name="cvv"
               id="cvv"
               maxLength="4"
+              onFocus={handleFocus}
               autoComplete="off"
             />
           </div>

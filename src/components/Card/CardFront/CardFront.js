@@ -12,7 +12,6 @@ const CardFront = () => {
   const fillerNumberArr = new Array(DEFAULT_CARD_LENGTH).fill('#');
 
   useEffect(() => {
-    console.log('patyh', `../../../assets/${formState.cardType}.png`);
     import(`../../../assets/${formState.cardType}.png`).then((logo) =>
       setLogo(logo.default)
     );

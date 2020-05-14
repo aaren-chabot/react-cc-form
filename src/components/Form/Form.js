@@ -36,6 +36,12 @@ const CardForm = () => {
       }
     }
 
+    if (property === 'cvv') {
+      if (!CVV_FORMAT.test(value)) {
+        return;
+      }
+    }
+
     updater({ ...state, [property]: value, cardType });
   };
 

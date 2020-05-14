@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useCallback } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 
 const FormStateContext = createContext();
 const FormUpdaterContext = createContext();
@@ -39,7 +39,7 @@ function useFormUpdater() {
     throw new Error('useFormUpdater must be used within a FormProvider');
   }
 
-  const reset = useCallback(() => setState(() => initialState, [setState]));
+  const reset = () => setState(() => initialState, [setState]);
   return { setState, reset };
 }
 

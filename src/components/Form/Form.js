@@ -103,7 +103,9 @@ const CardForm = () => {
                 MONTH
               </option>
               {months.map((month) => (
-                <option value={month}>{month}</option>
+                <option key={month} value={month}>
+                  {month}
+                </option>
               ))}
             </select>
 
@@ -118,7 +120,9 @@ const CardForm = () => {
                 YEAR
               </option>
               {years.map((year) => (
-                <option value={year}>{year}</option>
+                <option key={year} value={year}>
+                  {year}
+                </option>
               ))}
             </select>
           </div>

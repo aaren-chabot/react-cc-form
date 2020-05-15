@@ -79,7 +79,7 @@ const CardForm = () => {
 
         <div className={styles.name}>
           <label htmlFor="name">
-            Card Name
+            Cardholder Name
             <input
               type="text"
               value={state.name}

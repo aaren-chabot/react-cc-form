@@ -44,7 +44,7 @@ const CardFront = () => {
 
         <div className={styles['front-row-3']}>
           <label htmlFor="name" className={styles.name}>
-            <span>Card Holder</span>
+            <span>Cardholder Name</span>
             <span>{formState.name ? formState.name : 'FULL NAME'}</span>
           </label>
           <label htmlFor="expiration" className={styles.expiry}>

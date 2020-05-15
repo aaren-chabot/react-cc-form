@@ -73,6 +73,7 @@ const CardForm = () => {
             maxLength={DEFAULT_CARD_LENGTH}
             pattern={CARD_FORMAT}
             onFocus={handleFocus}
+            onBlur={handleBlur}
             autoComplete="off"
           />
         </div>
@@ -87,6 +88,7 @@ const CardForm = () => {
               name="name"
               id="name"
               onFocus={handleFocus}
+              onBlur={handleBlur}
               autoComplete="off"
             />
           </label>
@@ -102,6 +104,7 @@ const CardForm = () => {
               value={state.expMonth}
               onChange={handleChange}
               onFocus={handleFocus}
+              onBlur={handleBlur}
             >
               <option value="" disabled>
                 MONTH
@@ -119,6 +122,7 @@ const CardForm = () => {
               value={state.expYear}
               onChange={handleChange}
               onFocus={handleFocus}
+              onBlur={handleBlur}
             >
               <option value="" disabled>
                 YEAR

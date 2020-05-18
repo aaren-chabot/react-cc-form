@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import styles from './CardFront.module.scss';
-import chipImg from '../../../assets/chip.png';
+import chipImg from 'assets/chip.png';
 
-import { useFormState } from '../../../context/form.context';
-import { DEFAULT_CARD_LENGTH } from '../../../utils';
+import { useFormState } from 'context/form.context';
+import { DEFAULT_CARD_LENGTH } from 'utils';
 
 const CardFront = () => {
   const formState = useFormState();

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Card from '../Card/Card';
-import Form from '../Form/Form';
+import Card from 'components/Card/Card';
+import Form from 'components/Form/Form';
 
-import { FormProvider } from '../../context/form.context';
+import { FormProvider } from 'context/form.context';
 
 import styles from './CardForm.module.scss';
 

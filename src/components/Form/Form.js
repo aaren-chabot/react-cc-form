@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useFormState, useFormUpdater } from '../../context/form.context';
+import { useFormState, useFormUpdater } from 'context/form.context';
 import { years, months } from './Form.constants';
 import {
   CARD_RANGES,
@@ -8,7 +8,7 @@ import {
   CARD_FORMAT,
   CVV_LENGTH,
   CVV_FORMAT
-} from '../../utils';
+} from 'utils';
 
 import styles from './Form.module.scss';
 

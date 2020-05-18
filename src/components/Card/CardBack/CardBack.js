@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './CardBack.module.scss';
 
-import { useFormState } from '../../../context/form.context';
+import { useFormState } from 'context/form.context';
 
 const CardBack = () => {
   const formState = useFormState();
   const [logo, setLogo] = useState();
 
   useEffect(() => {
-    import(`../../../assets/${formState.cardType}.png`).then((logo) =>
+    import(`assets/${formState.cardType}.png`).then((logo) =>
       setLogo(logo.default)
     );
   }, [formState.cardType]);

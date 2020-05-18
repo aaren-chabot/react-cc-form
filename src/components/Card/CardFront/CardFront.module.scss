@@ -122,10 +122,12 @@
 
   span {
     width: 16px;
+    display: inline-block;
+    position: relative;
   }
 
   span:nth-of-type(4n + 4) {
-    margin-right: 30px;
+    margin-right: 28px;
   }
 }
 
